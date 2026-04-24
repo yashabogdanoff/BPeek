@@ -1,0 +1,42 @@
+# UE build outputs inside the plugin (regenerated per compile).
+# After the flat-repo refactor (2026-04-24) plugin lives at repo root,
+# so Binaries/Intermediate/ are siblings of Source/ instead of under BPeek/.
+/Binaries/
+/Intermediate/
+/Saved/
+/DerivedDataCache/
+
+# RunUAT BuildPlugin outputs — marketplace-ready packages + zips.
+# Keep out of git (build artefacts, not source).
+/Releases/
+/dist/
+
+# deploy-and-run.bat dumps host-project MD here for regression diffs.
+# Generated artefacts, regenerated every run.
+/Out/
+
+# RunUAT BuildPlugin regenerates this empty template on every build.
+# We don't ship extra files via Config/FilterPlugin.ini — all settings
+# live in BaseBPeek.ini / host-project DefaultBPeek.ini.
+/Config/FilterPlugin.ini
+
+# Claude Code scheduled-task state
+/.claude/
+
+# Owner-private notes: strategic analysis, personal roadmap, TODO
+# planning, decision docs. Not part of the public repo.
+/Docs/Internal/
+
+# Common cruft
+*.log
+*.pdb
+*.tmp
+*.swp
+*.suo
+*.user
+.vs/
+.vscode/
+.idea/
+*.DS_Store
+Thumbs.db
+desktop.ini

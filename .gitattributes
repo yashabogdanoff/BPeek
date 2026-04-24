@@ -1,0 +1,8 @@
+# Windows batch files must keep CRLF — cmd.exe's parser corrupts on LF-only
+# scripts when commandlets like UnrealEditor-Cmd return through them
+# (observed on UE 5.7: subsequent %VAR% expansions silently strip leading
+# chars, cleanup section skipped). Kazzinc 5.4 happened to survive; 5.7
+# does not.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
