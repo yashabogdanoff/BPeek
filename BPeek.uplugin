@@ -6,10 +6,10 @@
     "Description": "Scans a UE project and writes cross-linked markdown for every Blueprint, widget, enum, struct, data table, level, input mapping, gameplay ability, flow asset, behavior tree, and more. Tuned for AI-agent consumption.",
     "Category": "Developer Tools",
     "CreatedBy": "Arystan",
-    "CreatedByURL": "",
-    "DocsURL": "",
+    "CreatedByURL": "https://github.com/yashabogdanoff",
+    "DocsURL": "https://github.com/yashabogdanoff/BPeek/tree/main/Docs",
     "MarketplaceURL": "",
-    "SupportURL": "",
+    "SupportURL": "https://github.com/yashabogdanoff/BPeek/issues",
     "EnabledByDefault": true,
     "CanContainContent": false,
     "Modules": [
