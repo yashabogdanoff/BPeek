@@ -52,13 +52,11 @@
     "Plugins": [
         {
             "Name": "EnhancedInput",
-            "Enabled": true,
-            "Optional": true
+            "Enabled": true
         },
         {
             "Name": "GameplayAbilities",
-            "Enabled": true,
-            "Optional": true
+            "Enabled": true
         },
         {
             "Name": "Flow",

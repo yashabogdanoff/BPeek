@@ -35,6 +35,19 @@ public class BPeekFlow : BPeekBuild
             "Core", "CoreUObject", "Engine", "BPeek", "BPeekCompat"
         });
 
+        // BPEEK_RELEASE_BUILD=1 forces Flow integration off — used for
+        // public release zips so the resulting BPeekFlow.dll has no
+        // hard imports from the Flow plugin and loads fine on hosts
+        // where Flow isn't enabled (Lyra, Cropout, …). Source-install
+        // users skip the env var and get full Flow rendering when
+        // their project / engine has the plugin installed.
+        bool bReleaseBuild = System.Environment.GetEnvironmentVariable("BPEEK_RELEASE_BUILD") == "1";
+        if (bReleaseBuild)
+        {
+            PublicDefinitions.Add("BPEEK_WITH_FLOW=0");
+            return;
+        }
+
         bool bHasFlow = false;
 
         // Engine-level locations — work for both project and standalone

@@ -25,11 +25,11 @@ public class BPeekEnhancedInput : BPeekBuild
             "Core", "CoreUObject", "Engine", "BPeek", "BPeekCompat"
         });
 
-        // EnhancedInput is an engine built-in plugin — present in every
-        // supported UE install. Detection still runs so release builds
-        // on stripped engine installs don't hard-link against missing
-        // symbols, but BPEEK_RELEASE_BUILD does NOT opt out: users
-        // downloading the release zip expect IMC rendering to work.
+        // EnhancedInput is an engine built-in plugin — always present
+        // in any UE install. BPeek.uplugin lists it as a non-optional
+        // dependency, so when BPeek mounts on a host that hasn't enabled
+        // EnhancedInput yet, UE auto-enables it. The full integration
+        // is always shipped — no release-time stub.
         bool bHasEnhancedInput = false;
         {
             string EngineDir = Path.GetFullPath(Target.RelativeEnginePath);

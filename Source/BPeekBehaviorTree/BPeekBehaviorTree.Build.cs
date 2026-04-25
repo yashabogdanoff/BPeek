@@ -21,9 +21,10 @@ public class BPeekBehaviorTree : BPeekBuild
             "Core", "CoreUObject", "Engine", "BPeek", "BPeekCompat"
         });
 
-        // AIModule is an engine built-in module — always included in
-        // release builds. Detection only skips linkage on stripped
-        // engine installs.
+        // AIModule is an engine built-in module — always present in any
+        // UE install, automatically pulled in by editor builds. The full
+        // integration is always shipped; there's no release-time stub
+        // for BehaviorTree / Blackboard rendering.
         bool bHasAI = false;
         {
             string EngineDir = Path.GetFullPath(Target.RelativeEnginePath);

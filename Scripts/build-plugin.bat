@@ -51,7 +51,10 @@ set VERSION=%VERSION: =%
 set VERSION=%VERSION:"=%
 
 set PLUGIN=%CD%\BPeek.uplugin
-set PACKAGE_NAME=BPeek-v%VERSION%-UE%UE_VERSION%-Win64
+REM Optional package suffix — set BPEEK_PACKAGE_SUFFIX=-Flow (or similar) to
+REM produce a parallel artifact alongside the default release zip. Used to
+REM distinguish flow-enabled builds from the release-stub default.
+set PACKAGE_NAME=BPeek-v%VERSION%-UE%UE_VERSION%-Win64%BPEEK_PACKAGE_SUFFIX%
 set PACKAGE_DIR=%CD%\Releases\%PACKAGE_NAME%
 set ZIP_PATH=%CD%\Releases\%PACKAGE_NAME%.zip
 
@@ -86,19 +89,17 @@ if not "%RC%"=="0" (
     exit /b %RC%
 )
 
-REM Trim non-essential payload before zipping so the public release zip
-REM stays close to the ~10 MB minimal-DLL size (88 MB → ~10 MB).
+REM Trim debug payload before zipping. Source/ stays in the package so
+REM advanced users (those who install community plugins like Flow) can
+REM recompile against their own project context and get the rich
+REM integration unlocked. Pattern mirrors how Monolith ships its
+REM release archives.
 REM
-REM   Intermediate/  — UBT build artifacts, never shipped anyway.
-REM   Source/        — plugin source. Users who need to recompile (Flow
-REM                    support, different engine version) clone the repo
-REM                    directly; pre-built zip is for vanilla-engine use.
-REM   *.pdb          — Win64 debug symbols, ~50-60 MB combined. Useful
-REM                    for in-editor crash diagnostics, not for shipping.
+REM   Intermediate/  — UBT build artifacts, never shipped.
+REM   *.pdb          — Win64 debug symbols, ~50-60 MB combined.
 echo.
-echo [build-plugin] Trimming Intermediate/ Source/ and *.pdb before zip
+echo [build-plugin] Trimming Intermediate/ and *.pdb before zip
 if exist "%PACKAGE_DIR%\Intermediate" rmdir /s /q "%PACKAGE_DIR%\Intermediate"
-if exist "%PACKAGE_DIR%\Source"       rmdir /s /q "%PACKAGE_DIR%\Source"
 del /s /q "%PACKAGE_DIR%\*.pdb" >nul 2>&1
 
 echo [build-plugin] Zipping package into %ZIP_PATH%

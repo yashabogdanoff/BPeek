@@ -21,9 +21,11 @@ public class BPeekGAS : BPeekBuild
             "Core", "CoreUObject", "Engine", "BPeek", "BPeekCompat"
         });
 
-        // GameplayAbilities is an engine built-in plugin — always included
-        // in release builds. Detection only skips linkage on stripped
-        // engine installs.
+        // GameplayAbilities is an engine built-in plugin — always present
+        // in any UE install. BPeek.uplugin lists it as a non-optional
+        // dependency, so when BPeek mounts on a host that hasn't enabled
+        // GameplayAbilities yet, UE auto-enables it. The full integration
+        // is always shipped — no release-time stub for GAS.
         bool bHasGAS = false;
         {
             string EngineDir = Path.GetFullPath(Target.RelativeEnginePath);
