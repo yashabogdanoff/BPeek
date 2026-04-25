@@ -1,7 +1,7 @@
 {
     "FileVersion": 3,
     "Version": 1,
-    "VersionName": "1.0.0",
+    "VersionName": "1.1.0",
     "FriendlyName": "BPeek",
     "Description": "Scans a UE project and writes cross-linked markdown for every Blueprint, widget, enum, struct, data table, level, input mapping, gameplay ability, flow asset, behavior tree, and more. Tuned for AI-agent consumption.",
     "Category": "Developer Tools",
