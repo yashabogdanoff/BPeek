@@ -8,10 +8,11 @@ Versioning: [SemVer](https://semver.org/).
 ## [Unreleased]
 
 ### Added
-- UE 5.5 support — pre-built release zips published per engine version
-  (`BPeek-v1.0.0-UE5.4-Win64.zip`, `…-UE5.5-Win64.zip`).
-- Flow-enabled parallel build artifacts (`…-UE5.X-Win64-Flow.zip`) for
-  projects that already use the community Flow plugin.
+- UE 5.5 / 5.6 / 5.7 support — pre-built release zips published per
+  engine version (`BPeek-v1.0.0-UE5.<minor>-Win64.zip` for 5.4 .. 5.7).
+- Flow-enabled parallel build artifacts (`…-UE5.<minor>-Win64-Flow.zip`)
+  for all four engines, for projects that already use the community
+  Flow plugin.
 - `BPEEK_PACKAGE_SUFFIX` env var (`Scripts/build-plugin.bat`) for
   parallel-suffixed release artifacts.
 
@@ -34,6 +35,10 @@ Versioning: [SemVer](https://semver.org/).
   enabled the GameplayAbilities engine plugin (Cropout). Same class of
   failure for `BPeekEnhancedInput.dll` (Cropout) and `BPeekFlow.dll`
   (Lyra). All three resolved by the distribution-model change above.
+- `Scripts/deploy-prebuilt.bat` line endings normalised to CRLF — LF
+  in the file caused cmd.exe to misparse the post-scan MD count
+  expression on UE 5.6 / 5.7 hosts and report a false-negative
+  "FAILURE" even after a successful scan.
 
 ## [1.0.0]
 

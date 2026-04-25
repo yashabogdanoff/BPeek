@@ -188,15 +188,17 @@ for every setting the plugin understands.
 
 ## Engine support
 
-- **UE 5.4 and 5.5** — pre-built release zips published per engine
-  version (`BPeek-vX.Y.Z-UE5.4-Win64.zip`, `…-UE5.5-Win64.zip`, plus
-  `…-UE5.X-Win64-Flow.zip` variants with the community Flow plugin
-  linked in).
+- **UE 5.4, 5.5, 5.6, 5.7** — pre-built release zips published per
+  engine version (`BPeek-vX.Y.Z-UE5.<minor>-Win64.zip`, plus
+  `…-UE5.<minor>-Win64-Flow.zip` variants with the community Flow
+  plugin linked in).
 - Newer engine versions: build from source. `.Build.cs` files gate
   UE-version-specific polyfills via `BPEEK_UE_5_X_OR_LATER`
   preprocessor macros. No branches, no per-engine forks.
-- Verified hosts: Lyra Starter Game, Cropout Sample Project, FlowSolo
-  (Flow demo) on both 5.4 and 5.5.
+- Verified hosts per engine:
+  - 5.4 / 5.5 — Lyra Starter Game, Cropout Sample Project, FlowSolo demo.
+  - 5.6 / 5.7 — Lyra Starter Game, Cropout Sample Project, FlowGame demo
+    (Flow 2.2).
 
 ---
 
