@@ -98,9 +98,22 @@ Releases/BPeek-v<VersionName>-UE<EngineVersion>-Win64.zip  (shippable)
 ```
 
 `EngineVersion` is auto-derived from `BPEEK_UE_ROOT` folder name
-(`UE_5.4` → `5.4`). The release zip contains only `BPeek.uplugin` plus
-the Win64 binaries (strips `Intermediate/`, `Source/`, and `*.pdb`
-symbols) — around 650 KB.
+(`UE_5.4` → `5.4`). The release zip contains `BPeek.uplugin`, Win64
+binaries, and `Source/` (kept so users with extra plugins like Flow
+installed can recompile in-place). `Intermediate/` and `*.pdb` are
+stripped. Around 780 KB for the default zip.
+
+Two env vars control the distribution shape:
+
+| Var                     | Effect                                                                                                                                                          |
+|-------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `BPEEK_RELEASE_BUILD=1` | Forces `BPEEK_WITH_FLOW=0` so `BPeekFlow.dll` has no PE imports on `Flow.dll` — the resulting zip loads on hosts that haven't enabled Flow.                       |
+| `BPEEK_PACKAGE_SUFFIX`  | Appended to the package + zip names. Used to publish a parallel Flow-enabled artifact (`-Flow`) next to the release-stub default.                                |
+
+Built-in engine deps (EnhancedInput / GameplayAbilities / AIModule)
+always ship as full integration: they're listed in `BPeek.uplugin`
+without `Optional`, so UE auto-enables them on host mount. Flow is the
+only community dep — can't be auto-enabled, hence the stub.
 
 Users install by dropping the unzipped package into
 `<Host>/Plugins/BPeek/`. `Scripts/deploy-prebuilt.bat <host>` automates

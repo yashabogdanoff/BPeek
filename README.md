@@ -35,19 +35,29 @@ No external `.exe`. No .NET. Works on vanilla binary UE installs.
 
 ### From source (Flow users or contributors)
 
-1. `git clone https://github.com/<user>/BPeek.git <YourProject>/Plugins/BPeek`
-2. Add the same `.uproject` entry as above.
-3. Open the project — UBT compiles the plugin on first launch
+The release zip ships `Source/` alongside the pre-built binaries — you
+can recompile in-place against your engine + plugin set without
+re-cloning. Or clone the repo directly.
+
+1. Drop the unzipped package (or the cloned repo) into
+   `<YourProject>/Plugins/BPeek/`.
+2. Delete `Plugins/BPeek/Binaries/` so UBT rebuilds against your local
+   engine.
+3. Add the same `.uproject` entry as above.
+4. Open the project — UBT compiles the plugin on first launch
    (~30–40 s cold, ~3 s warm).
-4. Scan via **Tools → BPeek** menu or the headless commandlet:
+5. Scan via **Tools → BPeek** menu or the headless commandlet:
 
    ```bat
    UnrealEditor-Cmd.exe YourProject.uproject -run=BPeekScan -unattended -nosplash -nop4
    ```
 
-Source install picks up extras automatically via filesystem detection:
-install the community **Flow** plugin alongside BPeek and UFlowAsset
-rendering switches on.
+Source rebuild picks up the community **Flow** plugin automatically: if
+`Engine/Plugins/Marketplace/Flow/` exists, `BPeekFlow.Build.cs` flips
+`BPEEK_WITH_FLOW=1` and FlowAsset rendering switches on. The default
+release zip ships a Flow stub (loads cleanly on hosts without Flow); a
+parallel `-Flow` zip with the full integration is also published for
+projects that already use Flow.
 
 ---
 
@@ -178,10 +188,15 @@ for every setting the plugin understands.
 
 ## Engine support
 
-- **UE 5.4** — primary target. All release zips built against 5.4.
-- Newer engine versions: build from source; the `.Build.cs` files
-  gate UE-version-specific polyfills via `BPEEK_UE_5_X_OR_LATER`
+- **UE 5.4 and 5.5** — pre-built release zips published per engine
+  version (`BPeek-vX.Y.Z-UE5.4-Win64.zip`, `…-UE5.5-Win64.zip`, plus
+  `…-UE5.X-Win64-Flow.zip` variants with the community Flow plugin
+  linked in).
+- Newer engine versions: build from source. `.Build.cs` files gate
+  UE-version-specific polyfills via `BPEEK_UE_5_X_OR_LATER`
   preprocessor macros. No branches, no per-engine forks.
+- Verified hosts: Lyra Starter Game, Cropout Sample Project, FlowSolo
+  (Flow demo) on both 5.4 and 5.5.
 
 ---
 
